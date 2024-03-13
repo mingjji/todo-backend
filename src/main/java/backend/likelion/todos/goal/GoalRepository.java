@@ -18,7 +18,7 @@ public class GoalRepository {
     public Goal save(Goal goal) {
         // TODO [2단계] goal의 id를 설정하고, goals 맵에 추가하세요. 그리고 goal을 반환하세요.
         goal.setId(id);
-        goals.put(id, goal);
+        goals.put(id++, goal);
         return goal;
     }
 
