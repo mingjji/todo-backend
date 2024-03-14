@@ -27,7 +27,7 @@ public class Member {
     public void login(String password) {
         // TODO [1단계] 입력받은 password가 이 객체의 password와 같은지 확인하세요. 같지 않다면 "비밀번호가 일치하지 않습니다" 메시지와 함께 UnAuthorizedException을 발생시키세요.
         if (!this.password.equals(password)) {
-            throw new UnAuthorizedException("비밀번호가 일치하지 않습니다.");
+            throw new UnAuthorizedException("비밀번호가 일치하지 않습니다");
         }
     }
 }

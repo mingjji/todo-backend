@@ -18,7 +18,7 @@ public class MemberService {
         // TODO [1단계] Member 인스턴스를 생성하세요.
         // TODO [1단계] 생성된 Member 인스턴스를 memberRepository에 저장하고, 저장된 멤버의 ID를 반환하세요.
         if (memberRepository.findByUsername(username).isPresent()) {
-            throw new ConflictException("해당 아이디로 이미 가입한 회원이 있습니다.");
+            throw new ConflictException("해당 아이디로 이미 가입한 회원이 있습니다");
         }
         Member member = new Member(username, password, nickname, profileImageUrl);
         return memberRepository.save(member).getId();
