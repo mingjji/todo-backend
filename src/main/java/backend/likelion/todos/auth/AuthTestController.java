@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+//컨트롤러는 데이터나 뷰 반환함.
+//RestContreller는 데이터를 반환함.
 @RequestMapping("/test")
 public class AuthTestController {
 
