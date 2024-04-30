@@ -29,7 +29,8 @@ public class TodoController {
             @RequestBody TodoCreateRequest request
     ) {
         // TODO [9단계] TodoCreateRequest에서 goalId, content, date를 추출하여 todoService의 save 메소드를 호출하고, 생성된 Todo의 ID로 URI를 생성하여 ResponseEntity를 반환하세요.
-        return null;
+        Long todoId = todoService.save(memberId, request.goalId(), request.content(), request.date());
+        return ResponseEntity.created(URI.create("/todos/ + todoId")).build();
     }
 
     @PostMapping("/{id}/check")
@@ -38,6 +39,7 @@ public class TodoController {
             @PathVariable("id") Long todoId
     ) {
         // TODO [9단계] todoId와 memberId를 todoService의 check 메소드에 전달하여 Todo를 완료 상태로 변경하세요.
+        todoService.check(todoId, memberId);
     }
 
     @PostMapping("/{id}/uncheck")
@@ -46,6 +48,7 @@ public class TodoController {
             @PathVariable("id") Long todoId
     ) {
         // TODO [9단계] todoId와 memberId를 todoService의 uncheck 메소드에 전달하여 Todo를 미완료 상태로 변경하세요.
+        todoService.uncheck(todoId, memberId);
     }
 
     @PutMapping("/{id}")
@@ -55,6 +58,7 @@ public class TodoController {
             @RequestBody TodoUpdateRequest request
     ) {
         // TODO [9단계] TodoUpdateRequest에서 content, date를 추출하고, todoId와 memberId를 함께 todoService의 update 메소드에 전달하여 Todo 정보를 업데이트하세요.
+        todoService.update(todoId, memberId, request.content(), request.date());
     }
 
     @DeleteMapping("/{id}")
@@ -63,6 +67,7 @@ public class TodoController {
             @PathVariable("id") Long todoId
     ) {
         // TODO [9단계] todoId와 memberId를 todoService의 delete 메소드에 전달하여 Todo를 삭제하세요.
+        todoService.delete(todoId, memberId);
     }
 
     @GetMapping("/my")
@@ -72,6 +77,7 @@ public class TodoController {
             @RequestParam(value = "month", required = true) int month
     ) {
         // TODO [9단계] memberId와 YearMonth.of(year, month)를 todoService의 findAllByMemberIdAndDate 메소드에 전달하여 해당 기간의 모든 Todo를 조회하고, 조회된 정보를 ResponseEntity.ok()에 담아 반환하세요.
-        return null;
+        List<TodoWithDayResponse> todos = todoService.findAllByMemberIdAndDate(memberId, YearMonth.of(year, month));
+        return ResponseEntity.ok(todos);
     }
 }
